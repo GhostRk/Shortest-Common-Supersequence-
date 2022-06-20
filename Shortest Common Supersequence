@@ -1,0 +1,39 @@
+class Solution
+{
+    //Function to find length of shortest common supersequence of two strings.
+    public static int shortestCommonSupersequence(String X,String Y,int m,int n)
+    {
+        t=new int[m+1][n+1];
+        for(int i=0;i<=m;i++)
+        {
+            for(int j=0;j<=n;j++)
+            {
+                t[i][j]=-1;
+            }
+        }
+        //Your code here
+        return m+n-LCS(X,Y,m,n);
+    }
+    
+    static int[][] t;
+    private static int LCS(String X,String Y,int m,int n)
+    {
+        if(m==0 || n==0)
+        {
+            return 0;
+        }
+        if(t[m][n]!=-1)
+        {
+            return t[m][n];
+        }
+        
+        if(X.charAt(m-1)==Y.charAt(n-1))
+        {
+            return t[m][n]=1+LCS(X,Y,m-1,n-1);
+        }
+        else
+        {
+            return t[m][n]=Math.max(LCS(X,Y,m-1,n),LCS(X,Y,m,n-1));
+        }
+    }
+}
